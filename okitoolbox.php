@@ -4,7 +4,7 @@ public class okitoolbox {
 		
 	}
 	private function strcap($str,$action = "capitalize") { 
-    $TRChars            = array("ş", "Ş", "ç","Ç","ö","Ö","ü","Ü","ğ","Ğ","ı","İ","i","I");  
+    $TRChars            = array("ÅŸ", "Å", "Ã§","Ã‡","Ã¶","Ã–","Ã¼","Ãœ","ÄŸ","Ä","Ä±","Ä°","i","I");  
     $TRCharsHandlers    = array("[sh]", "[SH]", "[ch]","[CH]","[oo]","[OO]","[uu]","[UU]","[gg]","[GG]","[ww]","[_W]","[_w]","[WW]");  
     $str = str_replace($TRChars,$TRCharsHandlers,$str); 
     if ($action == "capitalize") { 
@@ -57,12 +57,12 @@ public class okitoolbox {
 	}
 	
 	protected function co_tr_sort($a, $b) {
-		$turkce = array('ç' => 'c', 'ğ' => 'g', 'ı' => 'i', 'ö' => 'o',
-				'ş' => 's', 'ü' => 'u', 'Ç' => 'C', 'Ğ' => 'G',
-				'İ' => 'I', 'Ö' => 'O', 'Ş' => 'S', 'Ü' => 'U');
+		$turkce = array('Ã§' => 'c', 'ÄŸ' => 'g', 'Ä±' => 'i', 'Ã¶' => 'o',
+				'ÅŸ' => 's', 'Ã¼' => 'u', 'Ã‡' => 'C', 'Ä' => 'G',
+				'Ä°' => 'I', 'Ã–' => 'O', 'Å' => 'S', 'Ãœ' => 'U');
 	
-		$a = preg_replace("/(ı|ğ|ü|ş|ö|ç|Ğ|Ü|Ş|İ|Ö|Ç)/e", "\$turkce['\\1'].'~'", $a);
-		$b = preg_replace("/(ı|ğ|ü|ş|ö|ç|Ğ|Ü|Ş|İ|Ö|Ç)/e", "\$turkce['\\1'].'~'", $b);
+		$a = preg_replace("/(Ä±|ÄŸ|Ã¼|ÅŸ|Ã¶|Ã§|Ä|Ãœ|Å|Ä°|Ã–|Ã‡)/e", "\$turkce['\\1'].'~'", $a);
+		$b = preg_replace("/(Ä±|ÄŸ|Ã¼|ÅŸ|Ã¶|Ã§|Ä|Ãœ|Å|Ä°|Ã–|Ã‡)/e", "\$turkce['\\1'].'~'", $b);
 	
 		if ($a == $b)
 			return 0;
@@ -110,15 +110,15 @@ public class okitoolbox {
 	}
 	
 	private function html_qtrm($string){
-		$search = array("”","“","&lsquo;","&rsquo;","&ldquo;","&rdquo;");
+		$search = array("â€","â€œ","&lsquo;","&rsquo;","&ldquo;","&rdquo;");
 		$replace = array("\"","\"","'","'","\"","\"");
 		return str_replace($search, $replace, $string);
 	}
 	
 	private function tr_money_to_string($money,$input_format=0){
-		$arr1 = array("","Bir","İki","Üç","Dört","Beş","Altı","Yedi","Sekiz","Dokuz");
-		$arr10 = array("","On","Yirmi","Otuz","Kırk","Elli","Atmış","Yetmiş","Seksen","Doksan");
-		$arr100 = array("","Yüz","İkiYüz","ÜçYüz","DörtYüz","BeşYüz","AltıYüz","YediYüz","SekizYüz","DokuzYüz");
+		$arr1 = array("","Bir","Ä°ki","ÃœÃ§","DÃ¶rt","BeÅŸ","AltÄ±","Yedi","Sekiz","Dokuz");
+		$arr10 = array("","On","Yirmi","Otuz","KÄ±rk","Elli","AtmÄ±ÅŸ","YetmiÅŸ","Seksen","Doksan");
+		$arr100 = array("","YÃ¼z","Ä°kiYÃ¼z","ÃœÃ§YÃ¼z","DÃ¶rtYÃ¼z","BeÅŸYÃ¼z","AltÄ±YÃ¼z","YediYÃ¼z","SekizYÃ¼z","DokuzYÃ¼z");
 		$add_word = array("","Bin","Milyon","Milyar","Trilyon","Katrilyon","Kentilyon","Seksilyon","Septilyon","Oktilyon");
 		
 		if($input_format==0){ //10000.25
@@ -162,7 +162,7 @@ public class okitoolbox {
 			$output.='Lira';
 		}
 		else {
-			$output.='Lira'.$arr10[substr($money_part1[1],0,1)].$arr1[substr($money_part1[1],1,1)].'Krş';
+			$output.='Lira'.$arr10[substr($money_part1[1],0,1)].$arr1[substr($money_part1[1],1,1)].'KrÅŸ';
 		} 
 		return $output;
 	}
@@ -222,7 +222,7 @@ public class okitoolbox {
 	}
 	
 	private function replace_html_turkish($text){
-		$chararr=array('&#304;'=>'İ','&#305;'=>'ı','&#231;'=>'ç','&#286;'=>'Ğ','&#287;'=>'ğ','&#199;'=>'Ç','&#351;'=>'ş','&#350;'=>'Ş','&Uuml;'=>'Ü','&uuml;'=>'ü','&Ouml;'=>'Ö','&ouml;'=>'ö');
+		$chararr=array('&#304;'=>'Ä°','&#305;'=>'Ä±','&#231;'=>'Ã§','&#286;'=>'Ä','&#287;'=>'ÄŸ','&#199;'=>'Ã‡','&#351;'=>'ÅŸ','&#350;'=>'Å','&Uuml;'=>'Ãœ','&uuml;'=>'Ã¼','&Ouml;'=>'Ã–','&ouml;'=>'Ã¶');
 		return str_replace(array_keys($chararr), array_values($chararr), $text);
 	}
 	
