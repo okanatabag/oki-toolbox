@@ -1,9 +1,9 @@
 <?php
-public class okitoolbox {
-	public function okitoolbox(){
+class okitoolbox {
+	public function __construct(){
 		
 	}
-	private function strcap($str,$action = "capitalize") { 
+	public function strcap($str,$action = "capitalize") { 
     $TRChars            = array("ş", "Ş", "ç","Ç","ö","Ö","ü","Ü","ğ","Ğ","ı","İ","i","I");  
     $TRCharsHandlers    = array("[sh]", "[SH]", "[ch]","[CH]","[oo]","[OO]","[uu]","[UU]","[gg]","[GG]","[ww]","[_W]","[_w]","[WW]");  
     $str = str_replace($TRChars,$TRCharsHandlers,$str); 
@@ -34,29 +34,29 @@ public class okitoolbox {
     return $str_return; 
 	}
 	
-	private function utf2iso($text){
+	public function utf_iso_tr($text){
 		$output=iconv("UTF-8", "ISO-8859-9", $text);
 		return $output;
 	}
 	
-	private function iso2utf($text){
+	public function iso_utf_tr($text){
 		$text=iconv("ISO-8859-9","UTF-8", $text);
 		return $text;
 	}
 	
-	private function encrypt($key,$text){ 
+	public function encrypt($key,$text){ 
     	$enc_text = @mcrypt_ecb (MCRYPT_3DES, $key, $text, MCRYPT_ENCRYPT); 
     	$enc_text = bin2hex($enc_text); 
     return $enc_text; 
 	} 
 	
-	private function decrypt($key,$text){ 
+	public function decrypt($key,$text){ 
     	$text = @pack('H*',$text); 
     	$text = @mcrypt_ecb (MCRYPT_3DES, $key, $text, MCRYPT_DECRYPT); 
-   		return trim($text); 
+   		return trim($text);
 	}
 	
-	protected function co_tr_sort($a, $b) {
+	private function co_tr_sort($a, $b){
 		$turkce = array('ç' => 'c', 'ğ' => 'g', 'ı' => 'i', 'ö' => 'o',
 				'ş' => 's', 'ü' => 'u', 'Ç' => 'C', 'Ğ' => 'G',
 				'İ' => 'I', 'Ö' => 'O', 'Ş' => 'S', 'Ü' => 'U');
@@ -69,12 +69,12 @@ public class okitoolbox {
 	
 		return ($a < $b) ? -1 : 1;
 	}
-	private function tr_sort(&$array) {
+	
+	public function tr_sort(&$array) {
 		return usort($array, "co_tr_sort");
 	}
 	
-	private function browser_info($agent=null) {
-		
+	public function browser_info($agent=null){
 		$known = array('msie', 'firefox', 'safari', 'webkit', 'opera', 'netscape','konqueror', 'gecko');
 		$agent = strtolower($agent ? $agent : $_SERVER['HTTP_USER_AGENT']);
 		$pattern = '#(?<browser>' . join('|', $known) .
@@ -84,14 +84,14 @@ public class okitoolbox {
 		return array($matches['browser'][$i] => $matches['version'][$i]);
 	}
 	
-	private function gen_rnd_string($length=10,$characters = '023456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ',$string = '') {
+	public function gen_rnd_string($length=10,$characters = '023456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ',$string = '') {
 		for ($p = 0; $p < $length; $p++) {
 			$string .= $characters[mt_rand(0, strlen($characters))];
 		}
 		return $string;
 	}
 	
-	private function calculate_gps($lat,$lng){
+	public function calculate_gps($lat,$lng){
 		$lat = (double) round($lat * 1e10) / 1e10;
 		$lng = (double) round($lng * 1e10) / 1e10;
 		$latDeg = floor($lat); $lat = ($lat - $latDeg) * 60;
@@ -109,13 +109,13 @@ public class okitoolbox {
 		return array('lat'=>$out_lat,'lng'=>$out_lng);
 	}
 	
-	private function html_qtrm($string){
+	public function html_qtrim($string){
 		$search = array("”","“","&lsquo;","&rsquo;","&ldquo;","&rdquo;");
 		$replace = array("\"","\"","'","'","\"","\"");
 		return str_replace($search, $replace, $string);
 	}
 	
-	private function tr_money_to_string($money,$input_format=0){
+	public function tr_money_to_string($money,$input_format=0){
 		$arr1 = array("","Bir","İki","Üç","Dört","Beş","Altı","Yedi","Sekiz","Dokuz");
 		$arr10 = array("","On","Yirmi","Otuz","Kırk","Elli","Atmış","Yetmiş","Seksen","Doksan");
 		$arr100 = array("","Yüz","İkiYüz","ÜçYüz","DörtYüz","BeşYüz","AltıYüz","YediYüz","SekizYüz","DokuzYüz");
@@ -167,13 +167,13 @@ public class okitoolbox {
 		return $output;
 	}
 	
-	private function format_bytes($size, $precision = 2){
+	public function format_bytes($size, $precision = 2){
 		$base = log($size) / log(1024);
 		$suffixes = array('byte', 'kb', 'mb', 'gb', 'tb');
 		return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 	}
 	
-	private function format_phone($phoneNumber) {
+	public function format_phone($phoneNumber) {
 		$phoneNumber = preg_replace('/[^0-9]/','',$phoneNumber);
 	
 		if(strlen($phoneNumber) > 10) {
@@ -201,7 +201,7 @@ public class okitoolbox {
 		return $phoneNumber;
 	}
 	
-	private function place_patterned_str($str='', $vars=array(), $char='%'){
+	public function place_patterned_str($str='', $vars=array(), $char='%'){
 		if (!$str) return '';
 		if (count($vars) > 0){
 			foreach ($vars as $k => $v){
@@ -211,7 +211,7 @@ public class okitoolbox {
 		return $str;
 	}
 	
-	private function super_unique($array){
+	public function super_unique($array){
 		$result = array_map("unserialize", array_unique(array_map("serialize", $array)));
 		foreach ($result as $key => $value){
 			if (is_array($value) ){
@@ -221,12 +221,12 @@ public class okitoolbox {
 		return $result;
 	}
 	
-	private function replace_html_turkish($text){
+	public function replace_html_turkish_char($text){
 		$chararr=array('&#304;'=>'İ','&#305;'=>'ı','&#231;'=>'ç','&#286;'=>'Ğ','&#287;'=>'ğ','&#199;'=>'Ç','&#351;'=>'ş','&#350;'=>'Ş','&Uuml;'=>'Ü','&uuml;'=>'ü','&Ouml;'=>'Ö','&ouml;'=>'ö');
 		return str_replace(array_keys($chararr), array_values($chararr), $text);
 	}
 	
-	function private cget_data($url,$host,$referer,$cookie) {
+	function cget_data($url,$host,$referer,$cookie) {
 		//$f = fopen('../tmp/request1.txt', 'w');
 		$ch = curl_init();
 		$userAgent='User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.91 Safari/537.36';
@@ -302,6 +302,10 @@ public class okitoolbox {
 		curl_close($ch);
 		//fclose($f);
 		return $result;
+	}
+	
+	public function __destruct(){
+	
 	}
 }
 ?>
