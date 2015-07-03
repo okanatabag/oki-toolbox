@@ -275,10 +275,6 @@ class okitoolbox {
 				'Accept-Language: en-US,en;q=0.8'
 		);
 		$timeout = 60;
-		foreach($fields as $key=>$value) {
-			$fields_string .= $key.'='.$value.'&';
-		}
-		rtrim($fields_string, '&');
 		$ch = curl_init();
 		curl_setopt($ch,CURLOPT_URL, $url);
 		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, $timeout);
