@@ -18,7 +18,7 @@ $otb = new okitoolbox();
 ## Latitude ve Longitude değerlerini gps formatına çevrimi
 `print_r($otb->calculate_gps(38.5845334, -90.2621693)); //Output Array ( [lat] => 38° 35' 4.3" N [lng] => 91° 44' 16.1" W )`
 
-## Rakamlar ile ifade edilen parayı TL cinsinden yazıya ceverimi
+## Rakamlar ile ifade edilen parayı TL cinsinden yazıya çevrimi
 `echo $otb->tr_money_to_string(10980.83); //Output OnBinDokuzYüzSeksenLiraSeksenÜçKrş`
 
 ## Büyük küçük karakter çevrimi 
