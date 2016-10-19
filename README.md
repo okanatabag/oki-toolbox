@@ -1,4 +1,4 @@
-# okitoolbox
+# oki-toolbox
 
 Bu sınıf ile php kodu geliştirirken sıkça gerek duyduğum bazı converting ve formatting fonksiyonlarını bir araya getirmeye çalıştım.
 
